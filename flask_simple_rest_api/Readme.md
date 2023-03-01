@@ -22,10 +22,12 @@ CONTAINER (Dockerfile included): ubuntu:20.04, Python 3.8.10, Flask 2.2.2, Werkz
 
 WITH: Advanced REST Client 16.0.1
 
+
 Specification
 =============
 
 This application illustrates creating REST API with Python and Flask and dockerizing it. It provides the folowing functionality: "Usage", "Get all people", "Get person details", "Insert new person", "Delete person"
+
 
 Notes
 =====
