@@ -15,7 +15,7 @@ ENV FLASK_RUN_PORT=5000
 EXPOSE 5000/tcp
 
 ARG DEBIAN_FRONTEND=noninteractive
-ENV PATH=/root/bin:${PATH}
+ENV PATH=/root:${PATH}
 
 
 RUN apt-get update
@@ -33,6 +33,7 @@ RUN apt-get --yes install software-properties-common
 RUN echo ================================================================ INSTALL PYTHON
 RUN apt-get --yes install python3
 RUN apt-get --yes install python3-pip
+RUN pip3 install flask
 
 
 RUN echo ================================================================ SETTING/MAKING PATHS
@@ -46,15 +47,15 @@ COPY . $APPHOME
 
 
 RUN echo ================================================================ RUNNING SERVICES
-RUN echo "#!/usr/bin/env bash" >> /root/bin/start_container_services.sh && \
-    echo "set -x" >> /root/bin/start_container_services.sh && \
-    echo "cd $APPHOME" >> /root/bin/start_container_services.sh && \
-    echo "flask run">> /root/bin/start_container_services.sh && \
-    chmod +x /root/bin/start_container_services.sh
+RUN echo "#!/usr/bin/env bash" >> /root/start_container_services.sh && \
+    echo "set -x" >> /root/start_container_services.sh && \
+    echo "cd $APPHOME" >> /root/start_container_services.sh && \
+    echo "flask run">> /root/start_container_services.sh && \
+    chmod +x /root/start_container_services.sh
 
 
 RUN echo ================================================================ FINISHED
 WORKDIR ${APPHOME}
-CMD /root/bin/start_container_services.sh
+CMD /root/start_container_services.sh
 
 # EOF

@@ -1,16 +1,22 @@
 Flask simple REST API exercice
 ==============================
 
-pip install -r requirements.txt
-
-flask run
-
 This exercice is fully functional as per the specification described here.
+
+
+BUILD AND RUN
+=============
+sudo docker build . --tag=flaskrestapp
+sudo docker run flaskrestapp
+
+Point your browser to port 5000 of the container IP to see the application is alive.
+Use a REST client to play with the app.
+
 
 TESTED ON
 =========
 
-PLATFORM: Lubuntu 20.04 LTS, Docker version 20.10.17, build 100c701
+PLATFORM: Lubuntu 22.04.2 LTS, Docker version 23.0.1, build a5ee5b1
 
 CONTAINER (Dockerfile included): ubuntu:20.04, Python 3.8.10, Flask 2.2.2, Werkzeug 2.2.2
 
