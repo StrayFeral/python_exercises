@@ -7,9 +7,11 @@ This exercice is fully functional as per the specification described here.
 BUILD AND RUN
 =============
 sudo docker build . --tag=flaskrestapp
+
 sudo docker run flaskrestapp
 
 Point your browser to port 5000 of the container IP to see the application is alive.
+
 Use a REST client to play with the app.
 
 
