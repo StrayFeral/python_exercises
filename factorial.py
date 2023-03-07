@@ -44,6 +44,16 @@ class FactorialCalculator:
             return n * self.calculate(n-1)
             
         
+    def calc2(self, n):
+        """Second solution. Much simpler, without recursion."""
+        
+        f = 1
+        for i in range(n,1, -1):
+            f = f * i
+        return f
+
+            
+        
 
 
 # ================================================================ MAIN
@@ -56,7 +66,8 @@ if __name__ == '__main__':
         # REMINDER: In mathematics, factorial of a number is noted,
         # using the exclamation mark! So in the string below, the
         # exclamation mark means "factorial" and not "not" !
-        print("ANSWER: {0}! == {1}".format(n, fc.calculate(n)))
+        print("ANSWER:  {0}! == {1}".format(n, fc.calculate(n)))
+        print("ANSWER2: {0}! == {1}".format(n, fc.calc2(n)))
         
         print("Program end. Bye.")
     
