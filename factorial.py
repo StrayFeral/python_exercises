@@ -33,8 +33,6 @@ class FactorialCalculator:
         
         Enjoy."""
         
-        result                  = 0
-        
         if n < 0:
             return None
         if n == 0:
