@@ -12,7 +12,7 @@ pp                              = pprint.PrettyPrinter(indent = 4) # Data::Dumpe
 
 
 class FactorialCalculator:
-    """Class to calculate the factorial of a number.
+    r"""Class to calculate the factorial of a number.
     2021, Evgueni.Antonov@gmail.com
     
     WHAT IS FACTORIAL OF A NUMBER:
@@ -50,6 +50,41 @@ class FactorialCalculator:
             f = f * i
         return f
 
+
+
+class FactorialIterator:
+    r"""Factorial calculator in the form of a custom iterator.
+    I am doing this just as an exercice in custom iterators.
+    2023, Evgueni.Antonov@gmail.com"""
+    
+    def __init__(self, n):
+        if n < 0:
+            raise Exception("N must be greater than zero.")
+        
+        self._final_n = n
+        self._n = 0
+    
+    
+    def __iter__(self):
+        return self
+    
+    
+    def __next__(self):
+        if self._n <= self._final_n:
+            if self._n == 0:
+                self._n += 1
+                return 1
+            
+            n = 1
+            for i in range(self._n,1, -1):
+                n = n * i
+            
+            self._n += 1
+            return n
+        
+        else:
+            raise StopIteration
+
             
         
 
@@ -66,6 +101,11 @@ if __name__ == '__main__':
         # exclamation mark means "factorial" and not "not" !
         print("ANSWER:  {0}! == {1}".format(n, fc.calculate(n)))
         print("ANSWER2: {0}! == {1}".format(n, fc.calc2(n)))
+        
+        print("--------- Using custom iterator:")
+        # We iterate two lists in paralel
+        for i, f in zip(range(n+1), FactorialIterator(n)):
+            print("{0}! == {1}".format(i, f))
         
         print("Program end. Bye.")
     
