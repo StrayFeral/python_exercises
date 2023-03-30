@@ -25,7 +25,6 @@ class LongCSVFileReader:
         if self._header:
             parsed_row = next(parsed_rows)
             csv_header = list(parsed_row)
-            row = dict(zip(csv_header[0], []))
         
         for parsed_row in parsed_rows:
             data = list(parsed_row)
