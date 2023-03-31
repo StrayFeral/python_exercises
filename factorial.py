@@ -24,7 +24,7 @@ class FactorialCalculator:
     0! = 1."""
     
     
-    def calculate(self, n):
+    def calculate(self, n: int) -> int:
         """Okay, this is fairly simple and any newbie out there must
         be able to understand it. Factorial is a classic programming
         problem, listed in all programming books (I guess all?).
@@ -42,7 +42,7 @@ class FactorialCalculator:
             return n * self.calculate(n-1)
             
         
-    def calc2(self, n):
+    def calc2(self, n: int) -> int:
         """Second solution. Much simpler, without recursion."""
         
         f = 1
@@ -54,10 +54,11 @@ class FactorialCalculator:
 
 class FactorialIterator:
     r"""Factorial calculator in the form of a custom iterator.
+    
     I am doing this just as an exercice in custom iterators.
     2023, Evgueni.Antonov@gmail.com"""
     
-    def __init__(self, n):
+    def __init__(self, n: int):
         if n < 0:
             raise Exception("N must be greater than zero.")
         
@@ -69,7 +70,7 @@ class FactorialIterator:
         return self
     
     
-    def __next__(self):
+    def __next__(self) -> int:
         if self._n <= self._final_n:
             if self._n == 0:
                 self._n += 1

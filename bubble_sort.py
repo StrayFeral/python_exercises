@@ -1,5 +1,4 @@
 #!/usr/bin/env python
-# -*- coding: utf-8 -*-
 
 import pprint
 
@@ -23,7 +22,7 @@ class BubbleSorter:
     (classic example is with integers)"""
     
             
-    def sort(self, some_list:list):
+    def sort(self, some_list: list):
         """Bubble sort method - the very basic and classic way, I
         first learned to do it in Pascal in the year 1991.
         

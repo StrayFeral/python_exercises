@@ -1,5 +1,4 @@
 #!/usr/bin/env python
-# -*- coding: utf-8 -*-
 
 """Common classes library module.
 (sorta like everyday swissarmy knife for the console user)

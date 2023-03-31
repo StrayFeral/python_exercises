@@ -5,13 +5,16 @@ from pprint import pprint
 
 
 class LongCSVFileReader:
-    """This is a generator pipeline, made of two generator
+    """Long CSV file reader.
+    2023, Evgueni.Antonov@gmail.com
+    
+    This is a generator pipeline, made of two generator
     comprehensions. I made this as an exercise in generator
     functions. This is the memory efficient way to read
     long files.
-    2023, Evgueni.Antonov@gmail.com"""
+    """
     
-    def __init__(self, filename, header=True, delimiter=","):
+    def __init__(self, filename, header: bool = True, delimiter: str = ","):
         self._filename = filename
         self._header = header
         self._delimiter = delimiter

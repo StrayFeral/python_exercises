@@ -1,5 +1,4 @@
 #!/usr/bin/env python
-# -*- coding: utf-8 -*-
 
 import pprint
 from collections import Counter
@@ -19,7 +18,7 @@ class UniqueCounter:
     2021, Evgueni.Antonov@gmail.com"""
     
     
-    def solution1(self, some_list:list) -> int:
+    def solution1(self, some_list: list) -> int:
         """This is not very pythonic.
         I used to do this in Perl when reading files, so it is
         applicable to other programming languages.
@@ -42,13 +41,13 @@ class UniqueCounter:
         return len(unique_holder)
     
     
-    def solution2(self, some_list:list) -> int:
+    def solution2(self, some_list: list) -> int:
         """Some pythonic way. Obviously this is gonna be faster.
         Also, this is the simplest pythonic way."""
         return len(set(some_list))
     
     
-    def solution3(self, some_list:list) -> int:
+    def solution3(self, some_list: list) -> int:
         """Using Counter - probably the best pythonic way.
         
         Counter counts hashable objects and seems to be created
@@ -62,7 +61,7 @@ class UniqueCounter:
         return len(Counter(some_list).keys())
     
     
-    def solution4(self, some_list:list) -> int:
+    def solution4(self, some_list: list) -> int:
         """Using Numpy - another pythonic way.
         
         While this perfectly does the job, it is actually created with
@@ -80,7 +79,7 @@ class UniqueCounter:
         return len(values)
     
     
-    def solution5(self, some_list:list) -> int:
+    def solution5(self, some_list: list) -> int:
         """And finally - Pandas.
         However I got this one from Internet. I am not really familiar
         with Pandas at the moment.

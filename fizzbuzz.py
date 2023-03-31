@@ -1,5 +1,4 @@
 #!/usr/bin/env python
-# -*- coding: utf-8 -*-
 
 import itertools
 import pprint
@@ -41,7 +40,7 @@ class FizzBuzzer:
     fizzbuzz_range              = 50 # A default
     
     
-    def solution1(self, rng=fizzbuzz_range):
+    def solution1(self, rng: int = fizzbuzz_range) -> str:
         """First FizzBuzz solution, that comes to everybody's mind.
         I made this one.
         
@@ -72,7 +71,7 @@ class FizzBuzzer:
             print(s)
     
     
-    def solution2(self, rng=fizzbuzz_range):
+    def solution2(self, rng: int = fizzbuzz_range) -> str:
         """Getting a bit more technical. I got this one from
         https://towardsdatascience.com/4-easy-ways-to-beat-fizz-buzz-in-python-cfa2dcb9b813
         
@@ -103,7 +102,7 @@ class FizzBuzzer:
             print(i)
     
     
-    def solution3(self, rng=fizzbuzz_range):
+    def solution3(self, rng: int = fizzbuzz_range) -> str:
         """A dirty one-liner. I got it from
         https://towardsdatascience.com/4-easy-ways-to-beat-fizz-buzz-in-python-cfa2dcb9b813
         

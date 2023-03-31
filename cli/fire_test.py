@@ -1,8 +1,7 @@
 #!/usr/bin/env python
 
-# Google Fire test
+"""Google Fire test
 
-"""
 FIRE adds cli interface to an existing callable. If callable is a class
 then first parameter is a method, next params are all method arguments.
 
