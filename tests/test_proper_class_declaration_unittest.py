@@ -4,7 +4,9 @@ import sys
 sys.path.append('..')
 from proper_class_declaration import DummyClass
 
-class TestDummyClass(unittest.TestCase):
+
+
+class TestDummyClassUnittestVersion(unittest.TestCase):
     """Proper unit test for DummyClass.
     
     The folowing code was separated and made in a more Pythonic way.

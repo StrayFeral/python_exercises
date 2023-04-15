@@ -1,49 +1,78 @@
 import pytest
 
-"""WORK IN PROGRESS!!"""
-
 import sys
 sys.path.append('..')
 from proper_class_declaration import DummyClass
 
-b1 = DummyClass(11)
-b2 = DummyClass(22)
-b3 = DummyClass(11)
 
 
-def test_default_values():
-    assert b1.x == 11
-    assert b2.x == 22
-    assert b3.x == 11
+# Solution 2) Use pre-defined data
+data_1 = [(DummyClass(11), DummyClass(22), DummyClass(33), (11, 22))]
+data_2 = [(DummyClass(22), DummyClass(11), DummyClass(11), (22, 11))]
+data_3 = [(DummyClass(11), DummyClass(11), True)]
+data_4 = [(DummyClass(11), "11")]
+data_5 = [(DummyClass(11), DummyClass(22), 33, 22)]
+data_6 = [(DummyClass(22), DummyClass(11), 11, 11)]
 
 
-def test_plus_operator():
-    assert b1 + b2 == DummyClass(33)
-    assert b1.x == 11 # Value should not be changed
-    assert b2.x == 22 # Value should not be changed
+
+class TestDummyClassPytestVersion():
+    """Proper unit test for DummyClass.
+    
+    The folowing code was separated and made in a more Pythonic way.
+    
+    This class went trough several refactorings:
+    1) The unittest way
+    2) The fixture way
+    3) Finally - the parametrizing way
+    
+    pytest -m smoke test_proper_class_declaration_pytest.py # Smoke testing
+    pytest test_proper_class_declaration_pytest.py          # Regression testing
+    """
 
 
-def test_minus_operator():
-    assert b2 - b1 == DummyClass(11)
-    assert b1.x == 11 # Value should not be changed
-    assert b2.x == 22 # Value should not be changed
+    # Solution 1) Use pytest fixtures
+    #@pytest.fixture
+    #def b1(self):
+    #    return DummyClass(11)
+    # .............. and so on ...........
+    
+    
+    @pytest.mark.parametrize("a, b, expected_1, expected_2", data_1)
+    def test_plus_operator(self, a, b, expected_1, expected_2):
+        assert a + b == expected_1
+        assert (a.x, b.x) == expected_2
 
+    
+    @pytest.mark.smoke
+    @pytest.mark.parametrize("a, b, expected_1, expected_2", data_2)
+    def test_minus_operator(self, a, b, expected_1, expected_2):
+        assert a - b == expected_1
+        assert (a.x, b.x) == expected_2
 
-def test_equals_operator():
-    assert (b1 == b3) is True
+    
+    @pytest.mark.parametrize("a, b, expected", data_3)
+    def test_equals_operator(self, a, b, expected):
+        assert (a == b) is expected
 
+    
+    @pytest.mark.parametrize("a, expected", data_4)
+    def test_str_operator(self, a, expected):
+        assert str(a) == expected
 
-def test_str_operator():
-    assert str(b1) == "11"
+    
+    @pytest.mark.smoke
+    @pytest.mark.parametrize("a, b, expected_1, expected_2", data_5)
+    def test_augmented_addition(self, a, b, expected_1, expected_2):
+        x1, x2 = a, b
+        x1 += x2
+        assert x1.x == expected_1
+        assert x2.x == expected_2
 
-
-def test_augmented_addition():
-    b1 += b2
-    assert b1.x == 33 # 11 + 22
-    assert b2.x == 22
-
-
-def test_augmented_subtraction():
-    b2 -= b1
-    assert b1.x == 11
-    assert b2.x == 11 # 22 - 11
+    
+    @pytest.mark.parametrize("a, b, expected_1, expected_2", data_6)
+    def test_augmented_subtraction(self, a, b, expected_1, expected_2):
+        x1, x2 = a, b
+        x1 -= x2
+        assert x1.x == expected_1
+        assert x2.x == expected_2
