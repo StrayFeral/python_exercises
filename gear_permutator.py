@@ -1,6 +1,8 @@
 # WORK IN PROGRESS !!!!!!!!!!!!!!!!!
 
+import dill
 from typing import List, ClassVar, Set
+from collections import deque
 from pprint import pprint
 
 
@@ -9,34 +11,32 @@ class GearWheel:
     """Single gear wheel. A generator.
     
     Args:
-        symbol_set: A set of symbols
+        symbol_set: A set of symbols - will be ordered
     
     Returns:
         str
     """
     
-    # We use this to pad to the desired length, sorta None, however
-    # sorted() cannot sort strings and NoneType
-    null_value: str = "@@@"
-    
-    def __init__(self, symbol_set: set, init_value: str = ""):
-        self._index: int = 0
-        #self._seq: List[str] = sorted(list(symbol_set) + [self.null_value]) # Better be sorted
-        self._seq: List[str] = list(symbol_set)
-        self._seq.sort()
-        self._seq.insert(0, self.null_value) # This have a special function
+    def __init__(self, symbol_set: set, init_value: str = "") -> None:
+        self.__index: int = 0
+        self.__seq: List[str] = list(symbol_set)
+        self.__seq.sort()
         
         if len(symbol_set) == 0:
             raise ValueError("The symbol_set argument cannot be an empty set.")
         
         # In case we are initialized with a value from the set
         if init_value:
-            self._index = self._seq.index(init_value)
+            self.__index = self.__seq.index(init_value)
         
         
     #def spin(self):
-    #    for item in self._seq:
+    #    for item in self.__seq:
     #        yield item
+    #    while self.__index < len(self.__seq):
+    #        yield self.__seq[self.__index]
+    #        self.__index += 1
+        
     
     
     def __iter__(self):
@@ -46,9 +46,9 @@ class GearWheel:
     
     
     def __next__(self) -> str:
-        if self._index < len(self._seq):
-            x = self._seq[self._index]
-            self._index += 1
+        if self.__index < len(self.__seq):
+            x = self.__seq[self.__index]
+            self.__index += 1
             return x
         else:
             raise StopIteration
@@ -69,44 +69,82 @@ class GearPermutator:
     """
     
     
-    def __init__(self, symbol_set: set, min_length: int, max_length: int):
-        self._gears: List[GearWheel] = []
+    def __init__(self, symbol_set: set, min_length: int, max_length: int) -> None:
+        self.__gears: List[GearWheel] = []
         
-        self._symbol_set = symbol_set
-        self._min_length = min_length
-        self._max_length = max_length
+        self.__symbol_set = symbol_set
+        self.__min_length = min_length
+        self.__max_length = max_length
         
         if min_length or max_length == 0:
             raise ValueError("The min_length or max_length arguments cannot be zero.")
         
-        for i in range(1, max_length):
-            self._gears.append(GearWheel(self._symbol_set))
+        for i in range(1, min_length):
+            self.__gears.append(GearWheel(self.__symbol_set))
     
     #def spin_wheels(self) -> str: # Next
     def __next__(self) -> str:
         result_list: List[str] = []
         
-        for i in length(self._gears) -1:
+        for i in length(self.__gears) -1:
             if i-1 == -1:
                 try:
-                    result_list[i] = next(self._gears[i])
+                    result_list[i] = next(self.__gears[i])
                 except:
-                    self._gears[i] = GearWheel(self._symbol_set)
+                    self.__gears[i] = GearWheel(self.__symbol_set)
             elif result_list[i-1] == startovia simvol:
                 # spin wheel
         
         
-        #for gear in self._gears:
+        # finally ________________
+        # zawyrti tekushtoto
+        # on exception go resetni i zawyrti sledwashtoto
+        spin_wheels = True
+        i = 0
+        while spin_wheels:
+            try:
+                result = next(self.__gears[i])
+                yield result # towa triabwa da e string !!
+                i += 1
+                
+            except StopIteration:
+                self.__gears[i] = GearWheel(self.__symbol_set)
+                i += 1
+                
+                # Add a new gear
+                if i == len(self.__gears) and i <= self.__max_length:
+                    self.__gears.append(GearWheel(self.__symbol_set))
+                else:
+                    spin_wheels = False
+                    # raise StopIteration # ???
+        
+        
+        
+        #for gear in self.__gears:
         #    symbol = gear.spin()
         #    yield symbol
         
         result = "".join(result_list)
         
-        if result == self._symbol_set[-1] * self._max_length:
+        if result == self.__symbol_set[-1] * self.__max_length:
             raise StopIteration
         
         #return result
         #yield result
+    
+    
+    #def __getstate__(self) -> str:
+    #    """Provides ONLY properties which will be serialized."""
+    #    attributes = self.__dict__.copy() # Copy all attributes
+    #    #del attributes['attribute_name_here'] # Deletes attributes which will not be serialized
+    #    return attributes
+    #    
+    #    # dill.dump(self) # ??? serialization
+    
+    
+    def __setstate__(self, state: str):
+        self.__dict__ = state
+        # self.bleh = bloh # Re-initialize attributes which were not serialized and adding them back
 
 
 
