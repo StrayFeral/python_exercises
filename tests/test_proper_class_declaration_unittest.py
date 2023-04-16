@@ -11,6 +11,9 @@ class TestDummyClassUnittestVersion(unittest.TestCase):
     
     The folowing code was separated and made in a more Pythonic way.
     
+    This is a unittest standard test, but pytest can run both
+    unittest and pytest tests, so this is pytest runnable as well.
+    
     python -m unittest test_proper_class_declaration_unittest.py
     """
     
