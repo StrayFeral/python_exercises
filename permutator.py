@@ -1,4 +1,3 @@
-#import dill
 from typing import List
 
 
@@ -8,6 +7,8 @@ class GearIterator:
     2023 Evgueni.Antonov@gmail.com
     
     Briefly simulates old gear permutators, like the old cars odometer.
+    
+    The class is serializable, works with both pickle and dill.
     
     Important:
         The class will SORT the initial symbol_set !!
@@ -106,21 +107,6 @@ class GearIterator:
                 spin_wheels = False
         
         return repr(self)
-    
-    
-    # FUTURE VERSION: SERIALIZABLE
-    #def __getstate__(self) -> str:
-    #    """Provides ONLY properties which will be serialized."""
-    #    attributes = self.__dict__.copy() # Copy all attributes
-    #    #del attributes['attribute_name_here'] # Deletes attributes which will not be serialized
-    #    return attributes
-        
-    #    # dill.dump(self) # ??? serialization
-    
-    
-    #def __setstate__(self, state: str):
-    #    self.__dict__ = state
-    #    # self.bleh = bloh # Re-initialize attributes which were not serialized and adding them back
     
     
     # FUTURE VERSION: THREADSAFE

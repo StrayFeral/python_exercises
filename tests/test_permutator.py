@@ -1,4 +1,5 @@
 import pytest
+import pickle
 
 import sys
 sys.path.append('..')
@@ -64,6 +65,21 @@ class TestGearIterator():
     def test_iterator_scenario2(self, expected):
         result = self.scenario2
         assert next(result) == expected
+    
+    
+    def test_iterator_scenario3(self):
+        """Testing serialization"""
+        our_iterator = self.scenario2
+        assert next(our_iterator) == "aap"
+        serialized = pickle.dumps(our_iterator)
+        print("\n-----")
+        print("Serialized length: {0}".format(len(serialized))) # 302
+        print("Serialized size: {0}".format(sys.getsizeof(serialized))) # 335
+        
+        assert next(our_iterator) == "aba"
+        
+        our_iterator = pickle.loads(serialized)
+        assert next(our_iterator) == "aba"
     
     
     @classmethod
