@@ -12,36 +12,37 @@ from permutator import GearIterator # type: ignore
 
 
 # Scenario 0) Invalid parameters exception test
-params0_1 = [{}, 0, 2]                      # Empty set
-params0_2 = [{"p","b","a"}, 3, 2]           # min_length > max_length
-params0_3 = [{"p","b","a"}, 5, 10, "ppp"]   # len(init_value) < min_length
-params0_4 = [{"p","b","a"}, 5, 10, "ppppppppppppppp"] # len(init_value) > max_length
+params0_1 = [[], 0, 2]                      # Empty set
+params0_2 = [["p","b","a"], 3, 2]           # min_length > max_length
+params0_3 = [["p","b","a"], 5, 10, "ppp"]   # len(init_value) < min_length
+params0_4 = [["p","b","a"], 5, 10, "ppppppppppppppp"] # len(init_value) > max_length
+params0_5 = [["p","b","a"], 3, 10, "pbz"]   # Invalid symbol in init_value
 
 # Scenario 1) no init_value, max_length=2, full test
-params1 = [{"p","b","a"}, 0, 2, ""]
+params1 = [["p","b","a"], 0, 2, ""]
 expected1 = [
-    ("a"),
-    ("b"),
     ("p"),
-    ("aa"),
-    ("ab"),
-    ("ap"),
-    ("ba"),
-    ("bb"),
-    ("bp"),
-    ("pa"),
-    ("pb"),
+    ("b"),
+    ("a"),
     ("pp"),
+    ("pb"),
+    ("pa"),
+    ("bp"),
+    ("bb"),
+    ("ba"),
+    ("ap"),
+    ("ab"),
+    ("aa"),
 ]
 
 # Scenario 2) init_value="pa", min_value=2, max_length=3, partial test
-params2 = [{"p","b","a"}, 2, 3, "pa"]
+params2 = [["p","b","a"], 2, 3, "ap"]
 expected2 = [
-    ("pa"),
-    ("pb"),
-    ("pp"),
-    ("aaa"),
-    ("aab"),
+    ("ap"),
+    ("ab"),
+    ("aa"),
+    ("ppp"),
+    ("ppb"),
 ]
 
 
@@ -79,6 +80,11 @@ class TestGearIterator():
             i = GearIterator(*params0_4)
     
     
+    def test_scenario0_5(self):
+        with pytest.raises(Exception):
+            i = GearIterator(*params0_5)
+    
+    
     @pytest.mark.parametrize("expected", expected1)
     def test_scenario1(self, expected):
         result = self.scenario1
@@ -100,16 +106,17 @@ class TestGearIterator():
     def test_scenario3(self):
         """Testing serialization"""
         our_iterator = self.scenario2
-        assert next(our_iterator) == "aap"
+        assert next(our_iterator) == "ppa"
         serialized = pickle.dumps(our_iterator)
         print("\n-----")
         print("Serialized length: {0}".format(len(serialized))) # 302
         print("Serialized size: {0}".format(sys.getsizeof(serialized))) # 335
         
-        assert next(our_iterator) == "aba"
+        assert next(our_iterator) == "pbp"
+        assert next(our_iterator) == "pbb"
         
         our_iterator = pickle.loads(serialized)
-        assert next(our_iterator) == "aba"
+        assert next(our_iterator) == "pbp"
     
     
     #def test_scenario4_thread_safe(self):
