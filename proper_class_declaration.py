@@ -1,7 +1,3 @@
-
-
-
-
 class DummyClass:
     """This is just a basic class.
     
