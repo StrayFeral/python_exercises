@@ -15,17 +15,17 @@ class DummyClass:
     """
 
     def __init__(self, x) -> None:
-        self.__x: int = x
+        self._x: int = x
 
 
     @property
     def x(self) -> int:
-        return self.__x
+        return self._x
 
     
     @x.setter
     def x(self, new_x: int) -> None:
-        self.__x = new_x
+        self._x = new_x
     
     
     def __add__(self, other) -> object:
