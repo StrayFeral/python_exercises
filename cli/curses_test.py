@@ -5,7 +5,7 @@
 import curses
 
 # Init
-stdscr                          = curses.initscr()
+stdscr = curses.initscr()
 stdscr.keypad(True)
 curses.noecho()
 curses.cbreak()

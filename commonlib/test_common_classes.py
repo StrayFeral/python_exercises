@@ -16,11 +16,11 @@ from common_classes import BasicCountryInfo
 
 
 # Default logging config
-logging_format                  = "[%(asctime)s][%(levelname)-8s][%(funcName)s] %(message)s"
-logging_level                   = logging.DEBUG
+logging_format = "[%(asctime)s][%(levelname)-8s][%(funcName)s] %(message)s"
+logging_level = logging.DEBUG
 
 logging.basicConfig(level=logging_level, format=logging_format)
-logger                          = logging.getLogger(__name__)
+logger = logging.getLogger(__name__)
 
 
 logger.info("TESTING some functions from common.py ...\n")
@@ -29,22 +29,35 @@ logger.info("TESTING some functions from common.py ...\n")
 logger.info("---")
 
 # Negative test: This works and raises exception about country not found
-#logger.info("Testing BasicCountryInfo, getting a hotfixed country: {0}".format(BasicCountryInfo.get("@@@")))
-logger.info("Testing BasicCountryInfo, getting a hotfixed country: {0}".format(BasicCountryInfo.get("@@")))
-logger.info("Testing BasicCountryInfo, getting a Bulgaria: {0}".format(BasicCountryInfo.get("bgr")))
+# logger.info("Testing BasicCountryInfo, getting a hotfixed country: {0}".format(BasicCountryInfo.get("@@@")))
+logger.info(
+    "Testing BasicCountryInfo, getting a hotfixed country: {0}".format(
+        BasicCountryInfo.get("@@")
+    )
+)
+logger.info(
+    "Testing BasicCountryInfo, getting a Bulgaria: {0}".format(
+        BasicCountryInfo.get("bgr")
+    )
+)
 
 logger.info("---")
+
 
 class Specific(GenericClass):
     def hey(self):
         self.logger.info("A message from a SpecificObject")
+
+
 specific_obj = Specific()
 specific_obj.hey()
 
 logger.info("---")
 
 SignalHandlers.set_ctrl_c_handler()
-logger.debug("CTRL-C handler is now set. Now looping for test of SIGINT ... press CTRL+C ...")
+logger.debug(
+    "CTRL-C handler is now set. Now looping for test of SIGINT ... press CTRL+C ..."
+)
 try:
     while True:
         pass
@@ -57,7 +70,7 @@ UserInterfaceBasics.make_shell_pause()
 
 logger.info("---")
 
-progress_args = {"total":10, "value":1}
+progress_args = {"total": 10, "value": 1}
 progress_args = MathTools.calculate_percentage(progress_args)
 progress_args = MathTools.calculate_eta(progress_args)
 logger.debug("calculate_percentage() 1/10: {0}%".format(progress_args["percentage"]))

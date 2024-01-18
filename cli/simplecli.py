@@ -6,7 +6,7 @@ import sys, os
 from pprint import pprint
 
 
-#pprint(sys.argv)
+# pprint(sys.argv)
 
 # Exit code 0 (os.EX_OK) means OK
 if len(sys.argv) < 2:
