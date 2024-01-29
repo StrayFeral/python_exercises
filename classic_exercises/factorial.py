@@ -1,19 +1,6 @@
-#!/usr/bin/env python
-# -*- coding: utf-8 -*-
-
-import pprint
-
-# Note: pprint in Python is like Data::Dumper in Perl - always nice to have it
-pp = pprint.PrettyPrinter(indent=4)  # Data::Dumper
-# pp.pprint(something)
-# (and no - pprint have nothing to do with factorial calculation,
-# but from my years old Perl practice, I always have such a thing
-# declared and ready to use)
-
-
 class FactorialCalculator:
     r"""Class to calculate the factorial of a number.
-    2021, Evgueni.Antonov@gmail.com
+    2024, Evgueni.Antonov@gmail.com
 
     WHAT IS FACTORIAL OF A NUMBER:
     The factorial of a number is the product of all the integers from 1
@@ -33,12 +20,12 @@ class FactorialCalculator:
         Enjoy."""
 
         if n < 0:
-            return None
-        if n == 0:
-            return 1
+            raise ValueError("Method expects a positive integer argument.")
 
         while n > 0:
             return n * self.calculate(n - 1)
+
+        return 1  # n == 0
 
     def calc2(self, n: int) -> int:
         """Second solution. Much simpler, without recursion."""
@@ -80,28 +67,3 @@ class FactorialIterator:
 
         else:
             raise StopIteration
-
-
-# ================================================================ MAIN
-if __name__ == "__main__":
-    try:
-        n = 6
-        fc = FactorialCalculator()
-        print("Hey y'all, let's calculate factorial of {0}!".format(n))
-
-        # REMINDER: In mathematics, factorial of a number is noted,
-        # using the exclamation mark! So in the string below, the
-        # exclamation mark means "factorial" and not "not" !
-        print("ANSWER:  {0}! == {1}".format(n, fc.calculate(n)))
-        print("ANSWER2: {0}! == {1}".format(n, fc.calc2(n)))
-
-        print("--------- Using custom iterator:")
-        # We iterate two lists in paralel
-        for i, f in zip(range(n + 1), FactorialIterator(n)):
-            print("{0}! == {1}".format(i, f))
-
-        print("Program end. Bye.")
-
-    except Exception as e:
-        print("================== Uncaught exception:")
-        print(str(e))
