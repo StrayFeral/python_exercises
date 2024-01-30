@@ -1,14 +1,4 @@
-#!/usr/bin/env python
-
-import pprint
-
-# Note: pprint in Python is like Data::Dumper in Perl - always nice to have it
-pp = pprint.PrettyPrinter(indent=4)  # Data::Dumper
-# pp.pprint(something)
-# (and no - pprint have nothing to do with bubble sorting,
-# but from my years old Perl practice, I always have such a thing
-# declared and ready to use)
-
+from typing import List
 
 class BubbleSorter:
     """Class to do bubble sorting on a list.
@@ -21,11 +11,11 @@ class BubbleSorter:
     NOTE: All list elements are supposed to be of the same type.
     (classic example is with integers)"""
 
-    def sort(self, some_list: list):
+    def sort(self, some_list: List[int]):
         """Bubble sort method - the very basic and classic way, I
         first learned to do it in Pascal in the year 1991.
 
-        This method expects a list of integers!"""
+        This method expects a list of integers and modifies the original list."""
 
         # Okay, let's sort someting else first - most modern
         # programming languages DO have their own sorting implementations
@@ -57,23 +47,3 @@ class BubbleSorter:
                 # Swapping
                 if some_list[i] > some_list[j]:
                     some_list[i], some_list[j] = some_list[j], some_list[i]
-
-
-# ================================================================ MAIN
-if __name__ == "__main__":
-    try:
-        cool_list = [4, 1, 5, 3, 2]
-        b = BubbleSorter()
-
-        print("Hey y'all, let's do bubble sort of this list:")
-        pp.pprint(cool_list)  # Now see why pprint is useful?
-
-        print("---------------------------- sorted:")
-        b.sort(cool_list)
-        pp.pprint(cool_list)
-
-        print("Program end. Bye.")
-
-    except Exception as e:
-        print("================== Uncaught exception:")
-        print(str(e))

@@ -1,17 +1,7 @@
-#!/usr/bin/env python
-
-import pprint
 from collections import Counter
 import numpy
 import pandas
 from typing import Dict, List
-
-# Note: pprint in Python is like Data::Dumper in Perl - always nice to have it
-pp = pprint.PrettyPrinter(indent=4)  # Data::Dumper
-# pp.pprint(something)
-# (and no - pprint have nothing to do with this exercise,
-# but from my years old Perl practice, I always have such a thing
-# declared and ready to use)
 
 
 class UniqueCounter:
@@ -35,9 +25,6 @@ class UniqueCounter:
             # Now we know how many times each value is in the list
             unique_holder[val] += 1
 
-        print("*** Solution1: How many times each value is found:")
-        pp.pprint(unique_holder)
-
         return len(unique_holder)
 
     def solution2(self, some_list: list) -> int:
@@ -51,10 +38,8 @@ class UniqueCounter:
         Counter counts hashable objects and seems to be created
         exactly for this job."""
 
-        print("*** Solution3: How many times each value is found:")
         # Converting two lists into a single dictionary
         counts = dict(zip(Counter(some_list).keys(), Counter(some_list).values()))
-        pp.pprint(counts)
 
         return len(Counter(some_list).keys())
 
@@ -69,9 +54,7 @@ class UniqueCounter:
         # On top of that, the returned values are sorted
         values, counts1 = numpy.unique(some_list, return_counts=True)
 
-        print("*** Solution4: How many times each value is found:")
         counts = dict(zip(values, counts1))
-        pp.pprint(counts)
 
         return len(values)
 
@@ -89,25 +72,3 @@ class UniqueCounter:
         5 solutions are more than enough."""
 
         return pandas.Series(some_list).nunique()
-
-
-# ================================================================ MAIN
-if __name__ == "__main__":
-    try:
-        cool_list = [1, 3, 21, 3, 45, 3, "meh", "blah", 21, 9, 3]
-        uc = UniqueCounter()
-
-        print("Hey y'all, let's count the unique values in this list:")
-        pp.pprint(cool_list)  # Now see why pprint is useful?
-
-        print("Solution1 unique values found: {0}".format(uc.solution1(cool_list)))
-        print("Solution2 unique values found: {0}".format(uc.solution2(cool_list)))
-        print("Solution3 unique values found: {0}".format(uc.solution3(cool_list)))
-        print("Solution4 unique values found: {0}".format(uc.solution4(cool_list)))
-        print("Solution5 unique values found: {0}".format(uc.solution5(cool_list)))
-
-        print("Program end. Bye.")
-
-    except Exception as e:
-        print("================== Uncaught exception:")
-        print(str(e))
