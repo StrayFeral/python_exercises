@@ -1,5 +1,6 @@
 from typing import List
 
+
 class BubbleSorter:
     """Class to do bubble sorting on a list.
     2021, Evgueni.Antonov@gmail.com
@@ -15,7 +16,8 @@ class BubbleSorter:
         """Bubble sort method - the very basic and classic way, I
         first learned to do it in Pascal in the year 1991.
 
-        This method expects a list of integers and modifies the original list."""
+        This method expects a list of integers and modifies the original list.
+        """
 
         # Okay, let's sort someting else first - most modern
         # programming languages DO have their own sorting implementations
@@ -36,7 +38,8 @@ class BubbleSorter:
 
         for i in range(0, len(some_list) - 1):
             for j in reversed(range(i + 1, len(some_list))):
-                # Just in case... (in Pascal you don't need to do it, but here you may)
+                # Just in case... (in Pascal you don't need to do it,
+                # but here you may)
                 if not isinstance(some_list[i], int) or not isinstance(
                     some_list[j], int
                 ):

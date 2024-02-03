@@ -1,0 +1,15 @@
+black
+mypy
+flake8
+pandas
+pandas-stubs
+pytest
+fire
+#fire-stubs
+progress
+tqdm
+types-tqdm
+iso3166
+flask
+types-requests
+

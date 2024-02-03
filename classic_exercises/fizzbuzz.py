@@ -95,15 +95,17 @@ class FizzBuzzer:
 
         ### And yet another iterator, this time containing iterables
         ### formatted for final display on screen.
-        ##displayables_iterator = (
-        ##    f"{i}{fizzbuzz_item}"
-        ##    for fizzbuzz_item, i in zip(fizzbuzz_iterator, itertools.count(1))
-        ##)
+        ## displayables_iterator = (
+        ##     f"{i}{fizzbuzz_item}"
+        ##     for fizzbuzz_item, i in zip(fizzbuzz_iterator,
+        ##         itertools.count(1))
+        ## )
 
         ### Finally! Dumping the range to STDOUT (by creating a slice)
-        ### for i in itertools.islice(displayables_iterator, rng):
-        ###    print(i)
-        ##l: List[str] = list(itertools.islice(displayables_iterator, rng))
+        ###  for i in itertools.islice(displayables_iterator, rng):
+        ###     print(i)
+        ## l: List[str] = list(itertools.islice(displayables_iterator,
+        ##     rng))
 
         # 2024-01-29 Code appended by me (Evgueni)
         # New update: Going tricky with a cool list comprehension in

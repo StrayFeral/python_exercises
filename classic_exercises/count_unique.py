@@ -38,9 +38,6 @@ class UniqueCounter:
         Counter counts hashable objects and seems to be created
         exactly for this job."""
 
-        # Converting two lists into a single dictionary
-        counts = dict(zip(Counter(some_list).keys(), Counter(some_list).values()))
-
         return len(Counter(some_list).keys())
 
     def solution4(self, some_list: list) -> int:
@@ -53,8 +50,6 @@ class UniqueCounter:
 
         # On top of that, the returned values are sorted
         values, counts1 = numpy.unique(some_list, return_counts=True)
-
-        counts = dict(zip(values, counts1))
 
         return len(values)
 

@@ -2,8 +2,8 @@
 
 # Testing simple way to handle command-line arguments
 
-import sys, os
-from pprint import pprint
+import sys
+import os
 
 
 # pprint(sys.argv)

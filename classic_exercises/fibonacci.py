@@ -1,9 +1,11 @@
 class FibonacciCalculator:
-    r"""Fibonacci sequence is a sequence in which each number is the sum of the two preceding ones.
+    r"""Fibonacci sequence is a sequence in which each number is the sum
+    of the two preceding ones.
     2024, Evgueni.Antonov@gmail.com
 
     Sequence of numbers from 0 to 10:
-    0, 1, 1, 2, 3, 5, 8, 13, 21, 34, 55"""
+    0, 1, 1, 2, 3, 5, 8, 13, 21, 34, 55
+    """
 
     def calculate(self, n: int) -> int:
         if n < 0:

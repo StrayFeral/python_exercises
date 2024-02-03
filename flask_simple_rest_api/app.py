@@ -7,9 +7,10 @@ Flask simple REST API exercice
 """
 
 import json
-import requests
 
-from markupsafe import escape
+# import requests
+
+# from markupsafe import escape
 from flask import Flask, abort, request
 
 # from flask import url_for
@@ -39,7 +40,7 @@ def homepage():
 def get_person(short_name):
     """Gets person information or list of all short names, if shortname='all'"""
 
-    if not short_name in people and short_name != "all":
+    if short_name not in people and short_name != "all":
         abort(404)
 
     if short_name == "all":
@@ -56,7 +57,7 @@ def insert_person():
     new_person = request.get_json()
 
     for field in required_fields:
-        if not field in new_person:
+        if field not in new_person:
             abort(404)
 
     short_name = new_person["short_name"]
@@ -73,7 +74,7 @@ def insert_person():
 def delete_person(short_name):
     """Deletes a person"""
 
-    if not short_name in people:
+    if short_name not in people:
         abort(404)
 
     deleted_person = people[short_name]
