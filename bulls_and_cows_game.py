@@ -123,7 +123,7 @@ class UserInput:
         return str(self)
 
     def __repr__(self) -> str:
-        return self._value
+        return self._value.upper()
 
 
 class InputAnalyzer:
@@ -160,11 +160,14 @@ class Game:
 
         retries: int = 0
         win: bool = False
+        user_quit = False
         while not win:
             retries += 1
 
             user_input: str = UserInput(retries).get()
             if user_input == "Q":
+                user_quit = True
+                retries -= 1
                 break
 
             user_guess: BCNumber = BCNumber(user_input)
@@ -173,14 +176,20 @@ class Game:
 
                 user_input = UserInput(retries).get()
                 if user_input == "Q":
+                    user_quit = True
                     break
+
                 user_guess = BCNumber(user_input)
 
-            analysis: str = str(InputAnalyzer(secret_number, user_guess))
-            print(analysis)
+            if user_quit:
+                retries -= 1
+                break
+            else:
+                analysis: str = str(InputAnalyzer(secret_number, user_guess))
+                print(analysis)
 
-            if str(secret_number) == str(user_guess):
-                win = True
+                if str(secret_number) == str(user_guess):
+                    win = True
 
         status: str = "lost."
         if win:
