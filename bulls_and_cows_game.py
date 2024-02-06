@@ -114,9 +114,7 @@ class UserInput:
             )
 
     def get(self) -> str:
-        self._value = input(
-            f"[{self._retries_count}] Enter four digit number or Q to quit: "
-        )
+        self._value = input(f"[{self._retries_count}] Your guess: ")
         self._value.strip()
 
         if len(self._value) and self._value[0].upper() == "Q":
@@ -156,7 +154,9 @@ class Game:
         while not secret_number.valid():
             secret_number = BCNumber(NewNumberPicker().value)
 
-        print("Game start.\nWe got a new secret number. Now you must guess it!")
+        print(
+            "Game start.\nWe got a new secret number. Now you must guess it!\nEnter a four-digit number or Q to quit!"
+        )
 
         retries: int = 0
         win: bool = False
