@@ -4,7 +4,6 @@
 
 import re
 import random
-from typing import List
 
 
 class Credits:
@@ -54,8 +53,7 @@ class BCNumber:
     """
 
     def __init__(self, num: str) -> None:
-        self._value: List[int] = []
-        self._value_str: str = num
+        self._value: str = num
 
     def valid(self) -> bool:
         if len(str(self)) != 4 or not re.search(r"^[0-9]+$", str(self)):
@@ -63,18 +61,14 @@ class BCNumber:
 
         # After ensuring all symbols are digits,
         # we can convert them to a list of integers
-        self._value = [int(x) for x in str(self)]
-        if len(set(self.value)) != 4:
+        value_int = [int(x) for x in str(self)]
+        if len(set(value_int)) != 4:
             return False
 
         return True
 
-    @property
-    def value(self) -> List[int]:
-        return self._value
-
     def __repr__(self) -> str:
-        return self._value_str
+        return self._value
 
 
 class NewNumberPicker:
@@ -135,9 +129,9 @@ class InputAnalyzer:
         cows: int = 0
 
         for i in range(4):
-            if guess.value[i] == number.value[i]:
+            if str(guess)[i] == str(number)[i]:
                 bulls += 1
-            elif guess.value[i] in number.value:
+            elif str(guess)[i] in str(number):
                 cows += 1
 
         return f"BULLS: {bulls}; COWS: {cows}"
