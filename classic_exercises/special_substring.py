@@ -78,38 +78,3 @@ class SpecialSubstring:
                     break
 
         return result
-
-    def calc2(self) -> int:
-        """Second solution.
-        
-        This one is by MLTechTrack youtube channel.
-        """
-        
-        k: int = self._k
-        p: str = self._p
-        n: int = len(p)
-
-        result: int = 0
-        distinct_chars: dict = {}
-
-        if len(p) == 0 or k == 0:
-            return result  # So far it is zero anyway
-
-        left: int = 0
-        right: int = 0
-
-        while right < n:
-            if p[right] not in distinct_chars:
-                k -= 1
-            distinct_chars[p[right]] = right
-
-            while k < 0:
-                if distinct_chars[p[left]] == left:
-                    k += 1
-                    del distinct_chars[p[left]]
-                left += 1
-
-            result = max(result, right - left + 1)
-            right += 1
-
-        return result

@@ -44,11 +44,3 @@ class TestSpecialSubstring:
     def test_result_values(self, testobj, expected):
         actual = testobj.max_normal_substring_length()
         assert actual == expected
-    
-    def test_result2_type(self, testobj):
-        actual = testobj.calc2()
-        assert isinstance(actual, int)
-
-    def test_result2_values(self, testobj, expected):
-        actual = testobj.calc2()
-        assert actual == expected
