@@ -2,6 +2,17 @@ from typing import List
 
 
 class MaxProfitCalculator:
+    """Calculate the best time to buy, given a list of prices.
+
+    Input: List of days with a price per share
+    Task: Calculate the maximum profit
+    Output: Maximum profit
+
+    EXAMPLE:
+    Input: [7, 1, 5, 3, 6, 4]
+    Output: 5
+    """
+
     def __init__(self, prices: List[int]) -> None:
         self._prices = prices
 
