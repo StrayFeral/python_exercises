@@ -13,7 +13,7 @@ class CustomIterator(Iterator):
         self._end: int = end
 
     def __next__(self):
-        if self._idx < len(self._seq):
+        if self._idx < self._end and self._idx < len(self._seq):
             item = self._seq[self._idx]
             self._idx += 1
             return item
