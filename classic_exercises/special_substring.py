@@ -1,6 +1,3 @@
-from typing import List
-
-
 class SpecialSubstring:
     """Find the length of the longest substring with at most K normal
     characters.
@@ -29,34 +26,7 @@ class SpecialSubstring:
     # DEFINITIONS
     NORMAL_CHAR: str = "0"
     SPECIAL_CHAR: str = "1"
-    ALPHABET: List[str] = [
-        "a",
-        "b",
-        "c",
-        "d",
-        "e",
-        "f",
-        "g",
-        "h",
-        "i",
-        "j",
-        "k",
-        "l",
-        "m",
-        "n",
-        "o",
-        "p",
-        "q",
-        "r",
-        "s",
-        "t",
-        "u",
-        "v",
-        "w",
-        "x",
-        "y",
-        "z",
-    ]
+    ALPHABET: str = "abcdefghijklmnopqrstuvwxyz"
 
     def __init__(self, p: str, char_value: str, k: int) -> None:
         self._p: str = p
