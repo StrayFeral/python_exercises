@@ -48,7 +48,7 @@ class SpecialSubstring:
 
         result: int = 0
 
-        if k == 0:
+        if len(p) == 0 or k == 0:
             return result  # So far it is zero anyway
 
         # Count of normal chars in the current window
