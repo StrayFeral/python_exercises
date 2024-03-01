@@ -1,3 +1,6 @@
+from collections import defaultdict
+
+
 class DistinctCharacters:
     """Find the length of the longest substring with at most
     K-distinct characters.
@@ -14,14 +17,12 @@ class DistinctCharacters:
         self._k: int = k
 
     def substring_length(self) -> int:
-        """Solution by MLTechTrack youtube channel."""
-
         k: int = self._k
         p: str = self._p
         n: int = len(p)
 
         result: int = 0
-        distinct_chars: dict = {}
+        distinct_chars: defaultdict = defaultdict(lambda: 0)
 
         if len(p) == 0 or k == 0:
             return result  # So far it is zero anyway
@@ -30,25 +31,21 @@ class DistinctCharacters:
         right: int = 0
 
         while right < n:
-            if p[right] not in distinct_chars:
-                k -= 1
-            distinct_chars[p[right]] = right
+            while right < n and len(distinct_chars.keys()) <= k:
+                distinct_chars[p[right]] += 1
+                result = max(result, sum(distinct_chars.values()))
+                right += 1
+                if (
+                    right < n
+                    and p[right] not in distinct_chars.keys()
+                    and len(distinct_chars.keys()) == k
+                ):
+                    break
 
-            while k < 0:
-                if distinct_chars[p[left]] == left:
-                    k += 1
+            while right < n and left < right and len(distinct_chars.keys()) >= k:
+                distinct_chars[p[left]] -= 1
+                if distinct_chars[p[left]] == 0:
                     del distinct_chars[p[left]]
                 left += 1
 
-            result = max(result, right - left + 1)
-            right += 1
-
         return result
-
-
-if __name__ == "__main__":
-    o = DistinctCharacters("ecebaa", 2)
-    actual = o.substring_length()
-    expected = 3
-    print(f"result = {actual}, expected = {expected}")
-    assert actual == expected
