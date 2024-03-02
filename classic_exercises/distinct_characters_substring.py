@@ -4,6 +4,9 @@ from collections import defaultdict
 class DistinctCharacters:
     """Find the length of the longest substring with at most
     K-distinct characters.
+    
+    2024 by Evgueni Antonov
+    Evgueni.Antonov@gmail.com
 
     NOTE: Input string contains only lower case characters.
     We use the sliding window technique.
