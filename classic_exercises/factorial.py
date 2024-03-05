@@ -9,6 +9,12 @@ class FactorialCalculator:
     For example, the factorial of 6 is 1*2*3*4*5*6 = 720. Factorial is
     not defined for negative numbers, and the factorial of zero is one,
     0! = 1."""
+    
+    def __init__(self) -> None:
+        self.memo: dict = {
+            0: 1,
+            1: 1,
+        }
 
     def calculate(self, n: int) -> int:
         """Okay, this is fairly simple and any newbie out there must
@@ -16,24 +22,28 @@ class FactorialCalculator:
         problem, listed in all programming books (I guess all?).
 
         This is a simple recursion example.
+        
+        Update 2024-03-05: Implemented memoization.
 
         Enjoy."""
 
         if n < 0:
             raise ValueError("Method expects a positive integer argument.")
-
-        while n > 0:
-            return n * self.calculate(n - 1)
-
-        return 1  # n == 0
+        
+        if n not in self.memo:
+            self.memo[n] =  n * self.calculate(n - 1)
+        
+        return self.memo[n]
 
     def calc2(self, n: int) -> int:
         """Second solution. Much simpler, without recursion."""
 
         f = 1
-        for i in range(n, 1, -1):
-            f = f * i
-        return f
+        if n not in self.memo:
+            for i in range(n, 1, -1):
+                f = f * i
+            self.memo[n] = f
+        return self.memo[n]
 
 
 class FactorialIterator:

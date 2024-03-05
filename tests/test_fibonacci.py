@@ -33,3 +33,7 @@ class TestFibonacci:
     def test_sequence(self, nmin, nmax, testobj, expected):
         actual = [testobj.calculate(n) for n in range(nmin, nmax+1)]
         assert actual == expected
+    
+    def test_sequence_fast_calc(self, nmin, nmax, testobj, expected):
+        actual = [testobj.fast_calc(n) for n in range(nmin, nmax+1)]
+        assert actual == expected
