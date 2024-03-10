@@ -42,7 +42,8 @@ class FizzBuzzer:
 
         Also of all proposed solutions, this is the the simplest."""
 
-        l: List[str] = []
+        l: List[str] = [0] * n
+        
         for i in range(1, rng + 1):
             s: str = ""
 
@@ -64,8 +65,8 @@ class FizzBuzzer:
             # handle the concatenation, but I like more the format().
             # You may try it f-strings if you want.
 
-            if s == "":
-                s = f"{i}"
+            if len(s) == 0:
+                s = str(i)
             l.append(s)
         return l
 
